@@ -49,3 +49,56 @@ components:
                 $ref: '#/components/schemas/Pet'
               default: []
 ```
+
+### OpenAPI Generator
+
+If using with OpenAPI Generator, configure the following mappings:
+
+[**Type Mappings**](https://openapi-generator.tech/docs/usage/#type-mappings-and-import-mappings)
+- object+pageable=Pageable
+- object+sort=Sort
+
+[**Schema Mappings**](https://openapi-generator.tech/docs/customization/#schema-mapping)
+- Pageable=org.springframework.data.domain.Pageable
+- Sort=org.springframework.data.domain.Sort
+
+e.g.
+
+With [openapi-generator-cli](https://github.com/OpenAPITools/openapi-generator-cli):
+
+```shell
+openapi-generator-cli generate \
+    -i petstore.yaml \
+    -g spring \
+    --schema-mappings=Pageable=org.springframework.data.domain.Pageable,Sort=org.springframework.data.domain.Sort \
+    --type-mappings=object+pageable=Pageable,object+sort=Sort
+```
+
+With [openapi-generator-maven-plugin](https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin):
+
+```yaml
+<plugin>
+    <groupId>org.openapitools</groupId>
+    <artifactId>openapi-generator-maven-plugin</artifactId>
+    <!-- ... -->
+    <executions>
+        <execution>
+            <goals>
+                <goal>generate</goal>
+            </goals>
+            <configuration>
+                <inputSpec>${project.basedir}/src/main/resources/petstore.yaml</inputSpec>
+                <generatorName>spring</generatorName>
+                <typeMappings>
+                    <typeMapping>object+pageable=Pageable</typeMapping>
+                    <typeMapping>object+sort=Sort</typeMapping>
+                </typeMappings>
+                <schemaMappings>
+                    <schemaMapping>Pageable=org.springframework.data.domain.Pageable</schemaMapping>
+                    <schemaMapping>Sort=org.springframework.data.domain.Sort</schemaMapping>
+                </schemaMappings>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
