@@ -7,7 +7,7 @@ While a [SwaggerHub Domain](https://support.smartbear.com/swaggerhub/docs/domain
 ## Usage
 
 1. Add `x-spring-paginated: true`.
-2. Add `pageParam`, `sizeParam` and `sortParam` parameters.
+2. Add `pageParam`, `sizeParam` and `sortParam` parameters (note that this will add `page`, `size` and `sort` parameters to the generated controller methods, until OpenAPITools/openapi-generator#8315 is implemented).
 3. Create a schema that inherits from `PaginationResponse` and use it in the response content schema.
 
 Example usage:
