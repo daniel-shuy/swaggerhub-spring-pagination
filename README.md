@@ -105,14 +105,14 @@ With [openapi-generator-maven-plugin](https://github.com/OpenAPITools/openapi-ge
 
 With [openapi-generator-gradle-plugin](https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-gradle-plugin):
 
-```kotlin
+```groovy
 // build.gradle
 openApiGenerate {
     inputSpec.set("$rootDir/src/main/resources/petstore.yaml")
     generatorName.set("spring")
     typeMappings.set([
-        object+pageable: "Pageable",
-        object+sort: "Sort",
+        "object+pageable": "Pageable",
+        "object+sort": "Sort",
     ])
     schemaMappings.set([
         Pageable: "org.springframework.data.domain.Pageable",
